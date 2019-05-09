@@ -17,7 +17,7 @@ var tpl *template.Template
 
 type Configuration struct {
 	Port           string
-	sendGridApiKey string
+	SendGridApiKey string
 }
 var configuration = Configuration{}
 
@@ -43,6 +43,7 @@ func main() {
 	http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
 	http.HandleFunc("/", index)
 	http.HandleFunc("/apply", apply)
+	log.Println(configuration.SendGridApiKey)
 	log.Println("Listening  on port: "  + port)
 	error = http.ListenAndServe(":"+port, nil)
 	if error != nil {
@@ -79,7 +80,8 @@ func apply(w http.ResponseWriter, req *http.Request) {
 	Send waitlist confirmation method.
  */
 func sendEmail(email string) error{
-	apikey := configuration.sendGridApiKey
+	apikey := configuration.SendGridApiKey
+	log.Println(configuration.SendGridApiKey);
 	from := mail.NewEmail("Casey Corvino", "caseycorvino@nyu.edu")
 	subject := "Apply Confirmation"
 	to := mail.NewEmail("New Sorter User", email)
