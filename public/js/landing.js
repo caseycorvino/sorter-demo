@@ -1,9 +1,9 @@
 $(document).ready(function () {
     $(".show-not-available").click((ev)=>{
         const alrt =  $('.status-alert');
-        alrt.text("Action Not Available in Demo");
+        alrt.text("ACTION NOT AVAILABLE IN DEMO");
         alrt.show();
-        alrt.fadeOut();
+        alrt.fadeOut(2400);
     });
     $(window).scroll(function() {
         if ($(this).scrollTop() < 16) {
@@ -23,14 +23,14 @@ $(document).ready(function () {
             data: { email : email}
         }).done(function() {
             const alrt =  $('.status-alert');
-            alrt.text("Confirmation sent to " + email);
+            alrt.text("CONFIRMATION SENT TO " + email.toUpperCase());
             alrt.show();
-            alrt.fadeOut();
+            alrt.fadeOut(2400);
         }).fail(function() {
             const alrt =  $('.status-alert');
-            alrt.text("Unknown Error Sending Email");
+            alrt.text("UNKNOWN ERROR SENDING EMAIL");
             alrt.show();
-            alrt.fadeOut();
+            alrt.fadeOut(2400);
         });
     })
 });

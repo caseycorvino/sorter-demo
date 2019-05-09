@@ -26,13 +26,17 @@ body,html{
 
 .status-alert{
     width: 100vw;
-    height: 80px;
+    height: 70px;
     background-color: #A12A22;
     color: white;
     display: none;
     text-align: center;
     line-height: 80px;
     vertical-align: center;
+    z-index: 200;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 /* Form Styles */
