@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"github.com/sendgrid/sendgrid-go"
@@ -43,6 +44,7 @@ func main() {
 	http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
 	http.HandleFunc("/", index)
 	http.HandleFunc("/apply", apply)
+	http.HandleFunc("/email-preview", emailPreview)
 	log.Println("Listening  on port: "  + port)
 	error = http.ListenAndServe(":"+port, nil)
 	if error != nil {
@@ -61,11 +63,32 @@ func index(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func emailPreview(w http.ResponseWriter, req *http.Request) {
+	//tpl.ExecuteTemplate(w,"landing.gohtml",dataStruct) pass with data
+	t, error := template.ParseFiles("templates/emails/email-apply.gohtml")
+	if error != nil {
+		panic(error)
+		return
+	}
+	error = t.Execute(w, struct { Email string}{"caseycorvino@nyu.edu"})
+	if error != nil {
+		log.Println("LOGGED", error)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+}
+
 func apply(w http.ResponseWriter, req *http.Request) {
 	var email string
 	if req.Method == http.MethodPost {
 		email = req.FormValue("email")
-		err := sendEmail(email)
+		err := sendEmail(email, email)
+		if err != nil {
+			log.Println("LOGGED", err)
+			http.Error(w, "Internal server error", http.StatusInternalServerError)
+			return
+		}
+		err = sendEmail(email, "caseycorvino@nyu.edu")
 		if err != nil {
 			log.Println("LOGGED", err)
 			http.Error(w, "Internal server error", http.StatusInternalServerError)
@@ -77,14 +100,15 @@ func apply(w http.ResponseWriter, req *http.Request) {
 
 /*
 	Send waitlist confirmation method.
- */
-func sendEmail(email string) error{
+*/
+func sendEmail(email string, reciever string) error{
 	apikey := configuration.SendGridApiKey
 	from := mail.NewEmail("Casey Corvino", "caseycorvino@nyu.edu")
 	subject := "Apply Confirmation"
-	to := mail.NewEmail("New Sorter User", email)
+	to := mail.NewEmail("New Sorter User", reciever)
 	plainTextContent := "Thanks for applying!"
-	htmlContent := "<strong>Thanks for applying!</strong>"
+	data := struct { Email string }{email}
+	htmlContent := templateToString("templates/emails/email-apply.gohtml", data)
 	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
 	client := sendgrid.NewSendClient(apikey)
 	response, err := client.Send(message)
@@ -119,4 +143,18 @@ func ParseTemplates() *template.Template {
 	}
 
 	return templ
+}
+func templateToString(filePath string, data interface{}) string{
+	t, error := template.ParseFiles(filePath)
+	if error != nil {
+		panic(error)
+		return "error"
+	}
+	buffer := new(bytes.Buffer)
+	if error = t.Execute(buffer, data)
+	error != nil {
+		panic(error)
+		return "error"
+	}
+	return buffer.String()
 }
