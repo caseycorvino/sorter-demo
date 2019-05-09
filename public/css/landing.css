@@ -1,0 +1,42 @@
+.waitlist-form .email-input{
+    margin-top: 40px;
+}
+.h-full{
+    margin-top: -80px;
+    height: 100%;
+    background-image: url("/public/img/Rectangle.png");
+    background-size: 100% 100%;
+}
+.centered-content-main{
+    height: 500px;
+    width: 400px;
+    position: absolute;
+    top: calc(50% - 350px);
+    left: calc(50% - 200px);
+    text-align: center;
+}
+.centered-content-main img{
+    width: 400px;
+}
+.centered-content-main p{
+    margin-top: 40px;
+    font-size: 23px;
+    font-weight: 100;
+    color: #4A4A4A;
+}
+.blue-head{
+    width: 25vh;
+    position: absolute;
+    bottom: -5px;
+    left: calc(50% - 12.5vh);
+}
+.features-box{
+    background-color: white;
+    position: relative;
+}
+.features-box img{
+    position: absolute;
+    width: 700px;
+    top: 20%;
+    left: calc(50% - 350px);
+}

@@ -1,0 +1,42 @@
+.nav-foot{
+    background-color: white;
+    width: 100%;
+    height: 40px;
+    position: relative;
+}
+.nav-foot .btn-group-right{
+    position: absolute;
+    right: 10px;
+    height: 0;
+    top: 8px;
+    padding: 0;
+    margin: 0;
+}
+.nav-foot .btn-group-right a{
+    margin: 0;
+    margin-right: 20px;
+    color: #979797;
+    padding: 0;
+    transition: color .5s ease;
+    -webkit-transition: color .5s ease;
+    -moz-transition: color .5s ease;
+    text-decoration: none;
+}
+.nav-foot .btn-group-right a:hover{
+    color: black;
+}
+.nav-foot .foot-logo{
+    position: absolute;
+    left: 10px;
+    top: 9px;
+    height: 20px;
+}
+.nav-foot .foot-sm{
+    position: absolute;
+    left: 120px;
+    top: 5px;
+    height: 25px;
+}
+.nav-foot .foot-sm:hover{
+    cursor: pointer;
+}

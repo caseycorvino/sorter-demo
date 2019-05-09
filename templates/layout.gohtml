@@ -1,0 +1,33 @@
+{{define "header"}}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sorter</title>
+        <link rel="stylesheet" href="/public/css/main.css">
+        <link rel="stylesheet" href="/public/css/header.css">
+        <link rel="stylesheet" href="/public/css/landing.css">
+        <link rel="stylesheet" href="/public/css/footer.css">
+    </head>
+    <body>
+    <header class="nav-head">
+        <div class="nav-main">
+            <a href="/"><img src='/public/img/logo.png' class='head-logo'/></a>
+            <div>
+                <a class="show-not-available pointer"><p>Login</p></a>
+            </div>
+        </div>
+    </header>
+{{end}}
+
+{{define "footer"}}
+    <footer class="nav-foot">
+        <img src='/public/img/logo.png' class='foot-logo'/>
+        <img src='/public/img/social.png' class='foot-sm show-not-available'/>
+        <div class="btn-group-right pointer"><a href="mailto:caseycorvino@nyu.edu">Contact</a><a class="show-not-available">Jobs</a><a class="show-not-available">Terms of Services</a></div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/js/landing.js"></script>
+    </body>
+    </html>
+{{end}}
