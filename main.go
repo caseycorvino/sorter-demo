@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
@@ -14,17 +15,36 @@ import (
 
 var tpl *template.Template
 
+type Configuration struct {
+	Port           string
+	sendGridApiKey string
+}
+
 func init() {
 	tpl = ParseTemplates() //maybe wrong
 }
 
 func main() {
-	var port = "8080"
+	// Read parameters
+	configuration := Configuration{}
+	file, error := os.Open("config/parameters.json")
+	if error != nil {
+		panic(error)
+		return
+	}
+	decoder := json.NewDecoder(file)
+	error = decoder.Decode(&configuration)
+	if error != nil {
+		panic(error)
+		return
+	}
+
+	var port = configuration.Port
 	http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
 	http.HandleFunc("/", index)
 	http.HandleFunc("/apply", apply)
-	log.Println("Listening...")
-	error := http.ListenAndServe(":"+port, nil)
+	log.Println("Listening  on port: "  + port)
+	error = http.ListenAndServe(":"+port, nil)
 	if error != nil {
 		panic(error)
 		return
