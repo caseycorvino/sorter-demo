@@ -26,12 +26,12 @@ body,html{
 
 .status-alert{
     width: 100vw;
-    height: 70px;
+    height: 60px;
     background-color: #A12A22;
     color: white;
     display: none;
     text-align: center;
-    line-height: 80px;
+    line-height: 60px;
     vertical-align: center;
     z-index: 200;
     position: fixed;
