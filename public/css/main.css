@@ -23,11 +23,22 @@ body,html{
 .h-40{
     height: calc(40% - 80px);
 }
+
+.status-alert{
+    width: 100vw;
+    height: 80px;
+    background-color: #A12A22;
+    color: white;
+    display: none;
+    text-align: center;
+    line-height: 80px;
+    vertical-align: center;
+}
+
 /* Form Styles */
 *:focus {
     outline: none;
 }
-
 .simple-text-in{
     border: none;
     width: 400px;
