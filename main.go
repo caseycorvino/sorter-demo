@@ -19,6 +19,7 @@ type Configuration struct {
 	Port           string
 	sendGridApiKey string
 }
+var configuration = Configuration{}
 
 func init() {
 	tpl = ParseTemplates() //maybe wrong
@@ -26,7 +27,6 @@ func init() {
 
 func main() {
 	// Read parameters
-	configuration := Configuration{}
 	file, error := os.Open("config/parameters.json")
 	if error != nil {
 		panic(error)
@@ -79,7 +79,7 @@ func apply(w http.ResponseWriter, req *http.Request) {
 	Send waitlist confirmation method.
  */
 func sendEmail(email string) error{
-	apikey := "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"
+	apikey := configuration.sendGridApiKey
 	from := mail.NewEmail("Casey Corvino", "caseycorvino@nyu.edu")
 	subject := "Apply Confirmation"
 	to := mail.NewEmail("New Sorter User", email)
