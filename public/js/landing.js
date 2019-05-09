@@ -1,6 +1,9 @@
 $(document).ready(function () {
     $(".show-not-available").click((ev)=>{
-         $('.status-alert').text("Action Not Available in Demo");
+        const alrt =  $('.status-alert');
+        alrt.text("Action Not Available in Demo");
+        alrt.show();
+        alrt.fadeOut();
     });
     $(window).scroll(function() {
         if ($(this).scrollTop() < 16) {
@@ -19,9 +22,15 @@ $(document).ready(function () {
             url: "/apply",
             data: { email : email}
         }).done(function() {
-            $('.status-alert').text("Confirmation sent to " + email);
+            const alrt =  $('.status-alert');
+            alrt.text("Confirmation sent to " + email);
+            alrt.show();
+            alrt.fadeOut();
         }).fail(function() {
-            $('.status-alert').text("Unknown Error Sending Email");
+            const alrt =  $('.status-alert');
+            alrt.text("Unknown Error Sending Email");
+            alrt.show();
+            alrt.fadeOut();
         });
     })
 });
