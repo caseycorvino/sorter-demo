@@ -11,14 +11,15 @@ $(document).ready(function () {
     });
     $('.waitlist-form').submit((ev)=>{
         ev.preventDefault();
-        const email = $('.waitlist-form .email-input').val();
+        const inputF = $('.waitlist-form .email-input');
+        inputF.val("");
+        const email = inputF.val();
         $.ajax({
             type: "POST",
             url: "/apply",
             data: { email : email}
         }).done(function() {
             alert( "Confirmation sent to " + email);
-            $('.waitlist-form .email-input').val("");
         }).fail(function() {
             alert( "error" );
         });
