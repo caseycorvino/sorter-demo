@@ -18,7 +18,7 @@ $(document).ready(function () {
             data: { email : email}
         }).done(function() {
             alert( "Confirmation sent to " + email);
-            $('.waitlist-form').reset()
+            $('.waitlist-form .email-input').val("");
         }).fail(function() {
             alert( "error" );
         });

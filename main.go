@@ -61,8 +61,8 @@ func apply(w http.ResponseWriter, req *http.Request) {
 func sendEmail(email string) error{
 	apikey := "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"
 	from := mail.NewEmail("Casey Corvino", "caseycorvino@nyu.edu")
-	subject := "Waitlist Confirmation"
-	to := mail.NewEmail("New User", email)
+	subject := "Apply Confirmation"
+	to := mail.NewEmail("New Sorter User", email)
 	plainTextContent := "Thanks for applying!"
 	htmlContent := "<strong>Thanks for applying!</strong>"
 	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
