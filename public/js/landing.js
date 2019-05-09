@@ -9,4 +9,18 @@ $(document).ready(function () {
             $('.nav-head').slideDown();
         }
     });
+    $('.waitlist-form').submit((ev)=>{
+        ev.preventDefault();
+        const email = $('.waitlist-form .email-input').val();
+        $.ajax({
+            type: "POST",
+            url: "/apply",
+            data: { email : email}
+        }).done(function() {
+            alert( "Confirmation sent to " + email);
+            $('.waitlist-form').reset()
+        }).fail(function() {
+            alert( "error" );
+        });
+    })
 });
