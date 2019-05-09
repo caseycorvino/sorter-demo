@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"html/template"
@@ -60,16 +61,20 @@ func apply(w http.ResponseWriter, req *http.Request) {
 func sendEmail(email string) error{
 	apikey := "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"
 	from := mail.NewEmail("Casey Corvino", "caseycorvino@nyu.edu")
-	subject := "Apply Confirmation"
-	to := mail.NewEmail("New Sorter User", email)
+	subject := "Waitlist Confirmation"
+	to := mail.NewEmail("New User", email)
 	plainTextContent := "Thanks for applying!"
-	htmlContent := "<p style='color: gray; border-bottom: 1px solid black'>Thanks for applying!</p>"
+	htmlContent := "<strong>Thanks for applying!</strong>"
 	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
 	client := sendgrid.NewSendClient(apikey)
-	_, err := client.Send(message)
+	response, err := client.Send(message)
 	if err != nil {
 		log.Println(err)
 		return err
+	}else{
+		fmt.Println(response.StatusCode)
+		fmt.Println(response.Body)
+		fmt.Println(response.Headers)
 	}
 	return nil
 }
