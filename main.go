@@ -161,6 +161,14 @@ func uploadToS3(w http.ResponseWriter, req *http.Request) {
 		}
 		defer file.Close()
 		log.Println("Uploaded", t.Format("2006-01-02 15:04:05"), " of size: ", n, "Successfully.")
+		data := struct { Status string }{"Success"}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusCreated)
+		err = json.NewEncoder(w).Encode(data)
+		if err != nil{
+			log.Fatalln(err)
+		}
+		return
 	}
 
 }
