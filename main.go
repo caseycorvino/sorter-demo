@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/minio/minio-go"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"html/template"
@@ -12,6 +13,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 var tpl *template.Template
@@ -19,6 +21,9 @@ var tpl *template.Template
 type Configuration struct {
 	Port           string
 	SendGridApiKey string
+	S3AccessKeyId  string
+	S3SecretKeyId  string
+	CSVBucket  	   string
 }
 var configuration = Configuration{}
 
@@ -45,6 +50,7 @@ func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/apply", apply)
 	http.HandleFunc("/email-preview", emailPreview)
+	http.HandleFunc("/upload", uploadToS3)
 	log.Println("Listening  on port: "  + port)
 	error = http.ListenAndServe(":"+port, nil)
 	if error != nil {
@@ -121,6 +127,42 @@ func sendEmail(email string, reciever string) error{
 		fmt.Println(response.Headers)
 	}
 	return nil
+}
+
+
+
+func uploadToS3(w http.ResponseWriter, req *http.Request) {
+	if req.Method == http.MethodPost {
+		//get form data
+		err := req.ParseMultipartForm(1000 << 20)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		file, handler, err := req.FormFile("csv-file")
+		if err != nil {
+			fmt.Println("Error Retrieving the File")
+			fmt.Println(err)
+			return
+		}
+		fmt.Printf("Uploaded File: %+v\n", handler.Filename)
+		fmt.Printf("File Size: %+v\n", handler.Size)
+		fmt.Printf("MIME Header: %+v\n", handler.Header)
+
+		s3Client, err := minio.New("s3.amazonaws.com", configuration.S3AccessKeyId, configuration.S3SecretKeyId, true)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		t := time.Now()
+		n, err := s3Client.PutObject(configuration.CSVBucket, t.Format("2006-01-02 15:04:05")+".csv", file, handler.Size, minio.PutObjectOptions{ContentType: "application/octet-stream"})
+		if err != nil {
+			log.Fatalln(err)
+		}
+		defer file.Close()
+		log.Println("Uploaded", t.Format("2006-01-02 15:04:05"), " of size: ", n, "Successfully.")
+	}
+
 }
 
 /*
