@@ -7,6 +7,8 @@ All entities will use bcrypt and salting for as many fields as possible, especia
 
 ## Domain Model:
 
+![domain_model](https://github.com/caseycorvino/sorter-demo/blob/master/sorter-architecture/p1.png "domain model" )
+
 ### ApiKey
 ```Golang
 type ApiKey struct {
