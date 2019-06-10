@@ -33,7 +33,7 @@ Used for unit testing. Extremely fast as it only tests changed code.
 ### Git and Github
 Versioning for our repository.
 
-**Need to do more research on CI/CD with lambda**
+**Need to do more research on CD with lambda**
 
 ## Other techonologies
 ### Github task boards 
