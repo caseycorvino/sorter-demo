@@ -3,7 +3,9 @@
 
 ## FRONTEND
 **Title:** Show landing
+
 **Actor:** Potential Client
+
 **Scenario:** 
 * Hits our domain
 * Server renders landing with "Contact Sales" form
@@ -16,7 +18,9 @@
 
 ## Pipeline
 **Title:** Create personality types for profiles in a given CSV 
+
 **Actor:** User
+
 **Scenario:** 
 * User uploads CSV to our s3 bucket
 * S3 upload triggers lambda
@@ -39,7 +43,9 @@
 
 ## REST API
 **Title:** Recieve personality type of site viewer
+
 **Actor:** Developer of client company
+
 **Scenario:** 
 * Hits our API with viewer information
 * Our server searches our internal database to find user
@@ -55,7 +61,9 @@
 
 ## USER MANAGEMENT
 **Title:** Create company
+
 **Actor:** New Client
+
 **Scenario:** 
 * Fills out form with company info
 * Fills out form of admin user
@@ -67,7 +75,9 @@
 * Company info, user info, billing information, must be valid
 
 **Title:** Add users to company
+
 **Actors:** Company Admin and New User
+
 **Scenario:** 
 * Goes to settings page
 * Selects Users
@@ -83,7 +93,9 @@
 * New user's email must be valid
 
 **Title:** Get API Keys
+
 **Actor:** Developer
+
 **Scenario:** 
 * Goes to settings page
 * Selects API Keys
@@ -97,7 +109,9 @@
 
 ### To contribute to this file, follow this format:
 **Title** - the goal - short sentence that starts with an active verb
+
 **Actor** - the *entity* involved in this goal
+
 **Scenario** - Bullet point step-by-step description of how the system and actor achieves this goal.
 Optional:
 * **Preconditions** - conditions that must hold true beforehand
