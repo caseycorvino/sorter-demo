@@ -71,7 +71,27 @@
 * API hit must have a valid API key
 
 **Extensions:** 
-* If user not found return 5xx error message
+* If user not found return 4xx error message
+
+
+**Title:** Update profile if conversion completed
+
+**Actor:** Profile User
+
+**Scenario:** 
+* Profile User makes conversion by clicking an advertisment or a specific element
+* Hits our API with viewer information and campaign information
+* Our server finds this profile
+* Our server adds this conversion data to the profile
+* Updates the profile personality score
+
+**Preconditions:**
+* Viewer information must be in valid format - email, deviceId ...
+* API hit must have a valid API key
+
+**Extensions:** 
+* If user not found create a user with the email and deviceId, send to pipeline
+
 
 
 ## User Management
