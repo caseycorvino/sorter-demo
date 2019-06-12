@@ -1,7 +1,7 @@
 #  Use Cases:
 *Broken up by business services to mimick a microservices format. Each subcategory could be an independent server*
 
-## FRONTEND
+## Frontend
 **Title:** Show landing
 
 **Actor:** Potential Client
@@ -15,6 +15,21 @@
 
 **Preconditions:**
 * Email and company info must be valid
+
+## OfficialPersonalityTest
+**Title:** Create personality profile based of user submitted personality test
+
+**Actor:** Profile User
+
+**Scenario:** 
+* User starts our personality test
+* User completes questions
+* User enters email
+* Present user results of their test
+* Send the collected data, email, encrypted deviceId to the pipeline   
+
+**Preconditions:**
+* Email must be valid
 
 ## Pipeline
 **Title:** Create personality types for profiles in a given CSV 
@@ -34,7 +49,7 @@
     * Send success email
 
 **Preconditions:**
-* CVS must be in valid format
+* CSV must be in valid format
 * User must be authenticated
 
 **Extensions:** 
@@ -59,7 +74,7 @@
 * If user not found return 5xx error message
 
 
-## USER MANAGEMENT
+## User Management
 **Title:** Create company
 
 **Actor:** New Client
