@@ -1,38 +1,6 @@
 #  Use Cases:
 *Broken up by business services to mimick a microservices format. Each subcategory could be an independent server*
 
-## Profile Management
-**Title:** Show a report based on the CSV profiles
-
-**Actor:** User
-
-**Scenario:**
-* User is presented the dashboard
-* Sees the overall breakdown of personality types
-* Click into a list and overall breakdown of that list
-* Click into a personality type and see the profile data for each personality type
-
-**Preconditions:**
-* User must be authenticated
-* User must have uploaded a CSV previously
-* The pipeline must have finished for this list
-
-**Title:** Show a report based on the CSV profiles
-
-**Actor:** User
-
-**Scenario:**
-* User clicks into a list
-* Clicks export
-* Server prepares a CSV with the profiles with personality types
-* The server sends the download
-
-**Preconditions:**
-* User must be authenticated
-* User must have uploaded a CSV previously
-* The pipeline must have finished for this list
-
-
 ## Frontend
 **Title:** Show landing
 
@@ -125,6 +93,36 @@
 * If user not found create a user with the email and deviceId, send to pipeline
 
 
+## Profile Management
+**Title:** Show a report based on the CSV profiles
+
+**Actor:** User
+
+**Scenario:**
+* User is presented the dashboard
+* Sees the overall breakdown of personality types
+* Click into a list and overall breakdown of that list
+* Click into a personality type and see the profile data for each personality type
+
+**Preconditions:**
+* User must be authenticated
+* User must have uploaded a CSV previously
+* The pipeline must have finished for this list
+
+**Title:** Show a report based on the CSV profiles
+
+**Actor:** User
+
+**Scenario:**
+* User clicks into a list
+* Clicks export
+* Server prepares a CSV with the profiles with personality types
+* The server sends the download
+
+**Preconditions:**
+* User must be authenticated
+* User must have uploaded a CSV previously
+* The pipeline must have finished for this list
 
 ## User Management
 **Title:** Create company
