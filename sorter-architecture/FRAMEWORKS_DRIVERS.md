@@ -6,7 +6,7 @@
 ### EC2
 Host our website, it's core actions, and our API. API must be constantly live. 
 
-### RDS
+### DocumentDB
 Stores our MongoDB database. 
 
 ### Redis and Elisticache
